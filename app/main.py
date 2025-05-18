@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 from typing import Type
 
 
@@ -36,6 +36,10 @@ class SlideLimitationValidator(ABC):
         self.weight = weight
         self.height = height
 
+    @abstractmethod
+    def validate(self) -> None:
+        pass
+
 
 class ChildrenSlideLimitationValidator(SlideLimitationValidator):
     age = IntegerRange(4, 14)
@@ -45,6 +49,9 @@ class ChildrenSlideLimitationValidator(SlideLimitationValidator):
     def __init__(self, age: int, weight: int, height: int) -> None:
         super().__init__(age, weight, height)
 
+    def validate(self) -> None:
+        pass
+
 
 class AdultSlideLimitationValidator(SlideLimitationValidator):
     age = IntegerRange(14, 60)
@@ -53,6 +60,9 @@ class AdultSlideLimitationValidator(SlideLimitationValidator):
 
     def __init__(self, age: int, weight: int, height: int) -> None:
         super().__init__(age, weight, height)
+
+    def validate(self) -> None:
+        pass
 
 
 class Slide:
